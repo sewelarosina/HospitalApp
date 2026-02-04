@@ -1,0 +1,11 @@
+﻿@model List<Patient>
+
+<h2>Patients</h2>
+<a href="/Patients/Create">Add Patient</a>
+
+<ul>
+    @foreach (var p in Model)
+    {
+        <li>@p.FullName (@p.Age)</li>
+    }
+</ul>
