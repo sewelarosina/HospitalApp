@@ -1,24 +1,43 @@
-﻿<h2>Book Appointment</h2>
+﻿@model Appointment
 
-<form method="post">
-    <label>Patient</label><br />
-    <select name="PatientId">
-        @foreach (var p in ViewBag.Patients)
-        {
-            <option value="@p.Id">@p.FullName</option>
-        }
-    </select><br /><br />
+<h2 class="mb-4">Book Appointment</h2>
 
-    <label>Doctor</label><br />
-    <select name="DoctorId">
-        @foreach (var d in ViewBag.Doctors)
-        {
-            <option value="@d.Id">@d.FullName</option>
-        }
-    </select><br /><br />
+<!-- Show error message if any -->
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
 
-    <label>Date</label><br />
-    <input type="datetime-local" name="AppointmentDate" /><br /><br />
+<form method="post" class="p-4 bg-white shadow-sm rounded">
 
-    <button type="submit">Save</button>
+    <div class="mb-3">
+        <label for="PatientId" class="form-label">Select Patient</label>
+        <select class="form-control" id="PatientId" name="PatientId" required>
+            @foreach (var p in ViewBag.Patients)
+            {
+                <option value="@p.Value">@p.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="DoctorId" class="form-label">Select Doctor</label>
+        <select class="form-control" id="DoctorId" name="DoctorId" required>
+            @foreach (var d in ViewBag.Doctors)
+            {
+                <option value="@d.Value">@d.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="AppointmentDate" class="form-label">Select Date & Time</label>
+        <input type="datetime-local" class="form-control" id="AppointmentDate" name="AppointmentDate" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Book Appointment</button>
+    <a href="/Appointments/Index" class="btn btn-secondary ms-2">Cancel</a>
+
 </form>

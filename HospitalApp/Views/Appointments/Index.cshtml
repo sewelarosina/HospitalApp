@@ -1,21 +1,23 @@
-﻿@model dynamic
+﻿@model List<Appointment>
 
 <h2>Appointment History</h2>
-<a href="/Appointments/Create">Book Appointment</a>
 
-<table border="1">
-    <tr>
-        <th>Patient</th>
-        <th>Doctor</th>
-        <th>Date</th>
-    </tr>
-
-    @foreach (var a in Model)
-    {
+<table class="table table-striped table-bordered shadow-sm">
+    <thead class="table-primary">
         <tr>
-            <td>@a.Patient.FullName</td>
-            <td>@a.Doctor.FullName</td>
-            <td>@a.AppointmentDate</td>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date & Time</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Patient.FullName</td>
+                <td>@a.Doctor.FullName</td>
+                <td>@a.AppointmentDate.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
 </table>
